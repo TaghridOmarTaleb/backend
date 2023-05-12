@@ -7,7 +7,10 @@ const workshopSchema = new Schema(
     image: String,
     title: String,
     description: String,
-    date: Date,
+    date: {
+      type: Date,
+      default: Date.now,
+    },
   },
   {
     collection: "workshops",

@@ -9,19 +9,15 @@ const contentSchema = new Schema(
 
     subtitle: [String],
 
-    idImage: {
-      type: Schema.Types.ObjectId,
-      ref: "Plant",
-    },
+    image: [String],
+    
   },
   {
     collection: "contents",
   }
 );
 
-// contentSchema.pre(["find", "findOne"], function () {
-//     this.populate("idImage");
-//   });
+
 
 const Content = model("Content", contentSchema);
 export default Content;

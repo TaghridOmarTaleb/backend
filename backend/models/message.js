@@ -21,7 +21,6 @@ const messageSchema = new Schema(
       type: String,
       required: [true, "Please add your email"],
       unique: true,
-      lowercase: true,
       match: [/\S+@\S+\.\S+/, "Please add a valid email address"],
     },
     createdAt: {
@@ -44,11 +43,6 @@ const messageSchema = new Schema(
   }
 );
 
-
-
-messageSchema.path('message').validate(function (value) {
-    return value.trim().length > 0;
-  }, 'Message cannot be empty');
   
   
 //   messageSchema.pre('save', function (next) {

@@ -21,13 +21,12 @@ const adminSchema = new Schema(
   },
   {
     collection: "admins",
-    timestamps: true,
   }
 );
 
-userSchema.methods.generateAuthToken = function () {
+adminSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
-    { _id },
+    { id : this._id },
     process.env.jwtPrivateKey
   );
   return token;
