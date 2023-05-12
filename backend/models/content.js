@@ -3,29 +3,24 @@ const { Schema, model } = mongoose;
 
 const contentSchema = new Schema(
   {
-    Title: {
-      type: String,
-    },
-    content: {
-        type: [String],
-      },
-      subtitle: {
-        type: [String],
-      },
+    title: String,
 
-    image: {
-        type: Schema.Types.ObjectId,
-        ref: 'Image'
-      },
+    content: [String],
+
+    subtitle: [String],
+
+    idImage: {
+      type: Schema.Types.ObjectId,
+      ref: "Plant",
+    },
   },
   {
     collection: "contents",
-
   }
 );
 
 // contentSchema.pre(["find", "findOne"], function () {
-//     this.populate("image");
+//     this.populate("idImage");
 //   });
 
 const Content = model("Content", contentSchema);

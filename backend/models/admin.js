@@ -9,16 +9,14 @@ const adminSchema = new Schema(
       type: String,
       required: [true, "Please add your first name"],
       trim: true,
+      unique: true,
      
     },
    
     password: {
       type: String,
-      required: true,
-    },
-    isLoggedIn: {
-      type: Boolean,
-      default: false,
+      required: [true, "Please add your password"],
+      trim: true,
     },
   },
   {
@@ -29,15 +27,10 @@ const adminSchema = new Schema(
 
 userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
-    { _id: this._id, isLoggedIn: this.isLoggedIn },
+    { _id },
     process.env.jwtPrivateKey
   );
   return token;
-};
-
-userSchema.methods.setIsLoggedIn = async function() {
-  this.isLoggedIn = true;
-  await this.save();
 };
 
 const Admin = model("Admin", adminSchema);

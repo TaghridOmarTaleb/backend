@@ -17,11 +17,26 @@ const messageSchema = new Schema(
       maxlength: [500, "The message cannot be more than 500 characters"],
       minlength: [2, "The message cannot be less than 2 characters"],
     },
+    email: {
+      type: String,
+      required: [true, "Please add your email"],
+      unique: true,
+      lowercase: true,
+      match: [/\S+@\S+\.\S+/, "Please add a valid email address"],
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+
     // viewedBy: {
     //   type: [String],
     //   default: [],
     // },
+    
   },
+  
+
   {
     collection: "messages",
     timestamps: true,
@@ -34,6 +49,7 @@ const messageSchema = new Schema(
 messageSchema.path('message').validate(function (value) {
     return value.trim().length > 0;
   }, 'Message cannot be empty');
+  
   
 //   messageSchema.pre('save', function (next) {
 //     if (this.isNew || this.isModified('message')) {
